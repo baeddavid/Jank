@@ -71,13 +71,9 @@ public class Jank extends JFrame implements ActionListener {
         menuTwo.add(menuItem5);
         menuTwo.add(menuItem6);
 
-        JMenuItem menuClose = new JMenuItem("close");
-        menuClose.addActionListener(this);
-
         // Add to menubar
         menuBar.add(menuOne);
         menuBar.add(menuTwo);
-        menuBar.add(menuClose);
 
         // Set the menu bars
         frame.setJMenuBar(menuBar);
