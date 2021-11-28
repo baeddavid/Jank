@@ -10,15 +10,15 @@ public class Actions {
         Action sayHi = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Hello");
+                System.out.println("Hello!");
             }
         };
         return sayHi;
     }
 
-    public static List<Action> generateActionList() {
-        List<Action> actionList = new ArrayList<>();
-        actionList.add(sayHi());
-        return actionList;
+    public static List<KeyActionPair> generateActionList() {
+        List<KeyActionPair> keyActionPairList = new ArrayList<>();
+        keyActionPairList.add(new KeyActionPair("sayHi", sayHi()));
+        return keyActionPairList;
     }
 }

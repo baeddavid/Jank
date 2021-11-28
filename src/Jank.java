@@ -3,7 +3,11 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.OceanTheme;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.*;
+
+import static Keybinds.Keybinds.generateKeybind;
 
 public class Jank extends JFrame implements ActionListener {
     // Text component
@@ -74,6 +78,8 @@ public class Jank extends JFrame implements ActionListener {
         // Add to menubar
         menuBar.add(menuOne);
         menuBar.add(menuTwo);
+
+        generateKeybind(textArea, KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK, "sayHi");
 
         // Set the menu bars
         frame.setJMenuBar(menuBar);

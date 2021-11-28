@@ -5,18 +5,18 @@ import java.util.List;
 import Keybinds.ActionList.Actions.*;
 
 public class ActionList {
-    public static List<Action> getActionList() {
+    public static List<KeyActionPair> getActionList() {
+        List<KeyActionPair> a = Actions.generateActionList();
         return Actions.generateActionList();
     }
 
     public static Action getAction(String actionName) {
-        List<Action> actionList = getActionList();
-        for(Action action : actionList) {
-            if(actionName == action.toString()) {
-                return action;
+        List<KeyActionPair> actionList = getActionList();
+        for(KeyActionPair keyActionPair : actionList) {
+            if(actionName == keyActionPair.getKey()) {
+                return keyActionPair.getAction();
             }
         }
-        System.out.println("NuLL FUCK");
         return null;
     }
 }
