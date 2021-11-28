@@ -27,7 +27,17 @@ public class Actions {
         };
         return cut;
     }
+
     // Paste action
+    public static Action paste() {
+        Action paste = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Paste");
+            }
+        };
+        return paste;
+    }
 
     // Undo action
 
