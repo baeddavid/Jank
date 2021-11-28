@@ -2,9 +2,6 @@ package Keybinds;
 
 import javax.swing.*;
 import Keybinds.ActionList.*;
-import java.awt.*;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 
 public class Keybinds {
     public static void generateKeybind(JTextArea textArea, int key, int modifier, String actionName) {
@@ -14,6 +11,4 @@ public class Keybinds {
         textArea.getActionMap().put(actionName, action);
 
     }
-
-
 }
