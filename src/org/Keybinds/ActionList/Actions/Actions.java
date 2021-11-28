@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.TextAreaMethods.TextAreaMethods;
+import org.Jank;
 
 public class Actions {
     // Test action to see if it's properly being passed into the KeyActionPair list
@@ -20,11 +21,12 @@ public class Actions {
     }
 
     // Copy action
-    public static Action copy() {
+    public static Action copyAction() {
         Action copy = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Copy");
+                TextAreaMethods.copy(Jank.textArea);
+                System.out.println(Jank.clipboard);
             }
         };
         return copy;
@@ -77,6 +79,7 @@ public class Actions {
     public static List<KeyActionPair> generateActionList() {
         List<KeyActionPair> keyActionPairList = new ArrayList<>();
         keyActionPairList.add(new KeyActionPair("sayHi", sayHi()));
+        keyActionPairList.add(new KeyActionPair("copyAction", copyAction()));
         return keyActionPairList;
     }
 }
