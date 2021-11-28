@@ -51,6 +51,15 @@ public class Actions {
     }
 
     // Redo action
+    public static Action redo() {
+        Action redo = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Redo");
+            }
+        };
+        return redo;
+    }
 
     public static List<KeyActionPair> generateActionList() {
         List<KeyActionPair> keyActionPairList = new ArrayList<>();
