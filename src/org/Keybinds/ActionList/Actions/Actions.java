@@ -26,7 +26,6 @@ public class Actions {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TextAreaMethods.copy(Jank.textArea);
-                System.out.println(Jank.clipboard);
             }
         };
         return copy;
