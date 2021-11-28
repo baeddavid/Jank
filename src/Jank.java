@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.io.*;
 
 import static Keybinds.Keybinds.generateKeybind;
+import static Keybinds.RemoveKeybind.removeKeybind;
 
 public class Jank extends JFrame implements ActionListener {
     // Text component
@@ -79,7 +80,15 @@ public class Jank extends JFrame implements ActionListener {
         menuBar.add(menuOne);
         menuBar.add(menuTwo);
 
-        generateKeybind(textArea, KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK, "sayHi");
+        // Remove default key binds
+        removeKeybind(textArea, KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK); // Remove ^X
+        removeKeybind(textArea, KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK); // Remove ^C
+        removeKeybind(textArea, KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK); // Remove ^V
+        removeKeybind(textArea, KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK); // Remove ^O
+
+        // Add Key binds for our methods
+        generateKeybind(textArea, KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK, "sayHi"); // test method
+        generateKeybind(textArea, KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK, "copyAction"); // Copy Action (^C)
 
         // Set the menu bars
         frame.setJMenuBar(menuBar);
