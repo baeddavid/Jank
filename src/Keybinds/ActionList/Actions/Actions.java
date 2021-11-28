@@ -40,6 +40,15 @@ public class Actions {
     }
 
     // Undo action
+    public static Action undo() {
+        Action undo = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Undo");
+            }
+        };
+        return undo;
+    }
 
     // Redo action
 
