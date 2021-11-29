@@ -1,3 +1,5 @@
+package org;
+
 import javax.swing.*;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.OceanTheme;
@@ -12,13 +14,13 @@ import static org.Keybinds.RemoveKeybind.removeKeybind;
 
 public class Jank extends JFrame implements ActionListener {
     // Text component
-    static JTextArea textArea;
+    public static JTextArea textArea;
 
     // Frame for the editor
     static JFrame frame;
 
     // Clipboard - where we store cut/copied text
-    public String clipboard;
+    public static String clipboard;
 
     // Constructor
     public Jank() {
@@ -38,10 +40,10 @@ public class Jank extends JFrame implements ActionListener {
 
         textArea = new JTextArea();
 
-        // Create menubar
+        // Create menu bar
         JMenuBar menuBar = new JMenuBar();
 
-        // Create a menu for the menubar
+        // Create a menu for the menu bar
         JMenu menuOne = new JMenu("File");
 
         // Create menu items
@@ -80,7 +82,7 @@ public class Jank extends JFrame implements ActionListener {
         menuTwo.add(menuItem5);
         menuTwo.add(menuItem6);
 
-        // Add to menubar
+        // Add to menu bar
         menuBar.add(menuOne);
         menuBar.add(menuTwo);
 
