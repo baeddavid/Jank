@@ -36,7 +36,7 @@ public class Actions {
         Action cut = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Cut");
+                TextAreaMethods.cut(Jank.textArea);
             }
         };
         return cut;
