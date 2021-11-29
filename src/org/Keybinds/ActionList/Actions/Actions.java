@@ -32,7 +32,7 @@ public class Actions {
     }
 
     // Cut action
-    public static Action cut() {
+    public static Action cutAction() {
         Action cut = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -80,6 +80,7 @@ public class Actions {
         keyActionPairList.add(new KeyActionPair("sayHi", sayHi()));
         keyActionPairList.add(new KeyActionPair("copyAction", copyAction()));
         keyActionPairList.add(new KeyActionPair("pasteAction", pasteAction()));
+        keyActionPairList.add(new KeyActionPair("cutAction", cutAction()));
         return keyActionPairList;
     }
 }
