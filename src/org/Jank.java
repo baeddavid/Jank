@@ -93,7 +93,7 @@ public class Jank extends JFrame implements ActionListener {
         removeKeybind(textArea, KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK); // Remove ^O
 
         // Add Key binds for our methods
-        generateKeybind(textArea, KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK, "sayHi"); // test method
+        generateKeybind(textArea, KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK, "cutAction"); // Cut Action
         generateKeybind(textArea, KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK, "copyAction"); // Copy Action (^C)
         generateKeybind(textArea, KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK, "pasteAction"); // Paste Action
 
