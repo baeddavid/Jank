@@ -1,8 +1,8 @@
-package Keybinds.ActionList;
+package org.Keybinds.ActionList;
 
 import javax.swing.*;
 import java.util.List;
-import Keybinds.ActionList.Actions.*;
+import org.Keybinds.ActionList.Actions.*;
 
 public class ActionList {
     public static List<KeyActionPair> getActionList() {
@@ -13,7 +13,7 @@ public class ActionList {
     public static Action getAction(String actionName) {
         List<KeyActionPair> actionList = getActionList();
         for(KeyActionPair keyActionPair : actionList) {
-            if(actionName == keyActionPair.getKey()) {
+            if(actionName.equals(keyActionPair.getKey())) {
                 return keyActionPair.getAction();
             }
         }
