@@ -1,4 +1,4 @@
-package Keybinds;
+package org.Keybinds;
 
 import javax.swing.*;
 

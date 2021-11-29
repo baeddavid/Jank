@@ -29,10 +29,15 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
 
     // Constructor
     public Jank() {
+        // Creating the frame
         frame = new JFrame("Jank");
+        // clipboard variable set to null to make it null safe
         clipboard = null;
+        // Create the text area
         textArea = new JTextArea();
+        // Add a document listener to the text area
         textArea.getDocument().addDocumentListener(this);
+
         // Placeholder UI
         try {
             // Set metal look and feel

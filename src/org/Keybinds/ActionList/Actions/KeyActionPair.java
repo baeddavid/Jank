@@ -1,4 +1,4 @@
-package Keybinds.ActionList.Actions;
+package org.Keybinds.ActionList.Actions;
 
 import javax.swing.*;
 
