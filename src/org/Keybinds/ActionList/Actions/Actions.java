@@ -43,11 +43,11 @@ public class Actions {
     }
 
     // Paste action
-    public static Action paste() {
+    public static Action pasteAction() {
         Action paste = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Paste");
+                TextAreaMethods.paste(Jank.textArea, Jank.clipboard);
             }
         };
         return paste;
@@ -79,6 +79,7 @@ public class Actions {
         List<KeyActionPair> keyActionPairList = new ArrayList<>();
         keyActionPairList.add(new KeyActionPair("sayHi", sayHi()));
         keyActionPairList.add(new KeyActionPair("copyAction", copyAction()));
+        keyActionPairList.add(new KeyActionPair("pasteAction", pasteAction()));
         return keyActionPairList;
     }
 }
