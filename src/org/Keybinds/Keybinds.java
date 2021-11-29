@@ -1,7 +1,7 @@
-package Keybinds;
+package org.Keybinds;
 
 import javax.swing.*;
-import Keybinds.ActionList.*;
+import org.Keybinds.ActionList.*;
 
 public class Keybinds {
     public static void generateKeybind(JTextArea textArea, int key, int modifier, String actionName) {
