@@ -1,8 +1,11 @@
 package org;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.OceanTheme;
+import javax.swing.text.Document;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -12,7 +15,7 @@ import java.io.*;
 import static org.Keybinds.Keybinds.generateKeybind;
 import static org.Keybinds.RemoveKeybind.removeKeybind;
 
-public class Jank extends JFrame implements ActionListener {
+public class Jank extends JFrame implements ActionListener, DocumentListener {
     // Text component
     public static JTextArea textArea;
 
@@ -22,10 +25,14 @@ public class Jank extends JFrame implements ActionListener {
     // Clipboard - where we store cut/copied text
     public static String clipboard;
 
+    static int count = 0;
+
     // Constructor
     public Jank() {
         frame = new JFrame("Jank");
         clipboard = null;
+        textArea = new JTextArea();
+        textArea.getDocument().addDocumentListener(this);
         // Placeholder UI
         try {
             // Set metal look and feel
@@ -37,8 +44,6 @@ public class Jank extends JFrame implements ActionListener {
         catch (Exception e) {
             System.out.println("Error: " + e);
         }
-
-        textArea = new JTextArea();
 
         // Create menu bar
         JMenuBar menuBar = new JMenuBar();
@@ -96,6 +101,7 @@ public class Jank extends JFrame implements ActionListener {
         generateKeybind(textArea, KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK, "cutAction"); // Cut Action
         generateKeybind(textArea, KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK, "copyAction"); // Copy Action (^C)
         generateKeybind(textArea, KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK, "pasteAction"); // Paste Action
+        generateKeybind(textArea, KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK, "undoAction"); // Not yet implemented
 
         // Set the menu bars
         frame.setJMenuBar(menuBar);
@@ -206,6 +212,19 @@ public class Jank extends JFrame implements ActionListener {
         else if (s.equals("close")) {
             frame.setVisible(false);
         }
+    }
+
+    public void insertUpdate(DocumentEvent e) {
+        count++;
+        System.out.println(count+": Insert update - "+textArea.getText());
+    }
+    public void removeUpdate(DocumentEvent e) {
+        count++;
+        System.out.println(count+": Remove update - "+textArea.getText());
+    }
+    public void changedUpdate(DocumentEvent e) {
+        count++;
+        System.out.println(count+": Change update - "+textArea.getText());
     }
 
     public static void main(String[] args) {
