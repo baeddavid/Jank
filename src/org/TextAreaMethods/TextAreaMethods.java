@@ -15,4 +15,10 @@ public class TextAreaMethods {
     public static void paste(JTextArea textArea, String clipboard) {
         textArea.replaceSelection(clipboard);
     }
+
+    // Cut method
+    public static void cut(JTextArea textArea) {
+        Jank.clipboard = textArea.getSelectedText();
+        textArea.replaceSelection("");
+    }
 }
