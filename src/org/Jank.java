@@ -25,7 +25,7 @@ public class Jank extends JFrame implements ActionListener {
     // Constructor
     public Jank() {
         frame = new JFrame("Jank");
-        clipboard = "";
+        clipboard = null;
         // Placeholder UI
         try {
             // Set metal look and feel
