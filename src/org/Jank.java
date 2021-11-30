@@ -1,16 +1,21 @@
 package org;
 
+import org.TextAreaClasses.Chunk;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.OceanTheme;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.*;
+
+import java.util.Stack;
 
 import static org.Keybinds.Keybinds.generateKeybind;
 import static org.Keybinds.RemoveKeybind.removeKeybind;
@@ -22,8 +27,20 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
     // Frame for the editor
     static JFrame frame;
 
+    // Old document for comparison
+    public String oldDocument;
+    // Current caret position (1 indexed)
+    public int currentCaretPosition;
+    // Last caret position
+    public int lastCaretPosition;
     // Clipboard - where we store cut/copied text
     public static String clipboard;
+
+    // Stack containing chunks
+    public static Stack<Chunk> undoStack;
+
+    // Timer to keep track of last key event
+    public Timer timer;
 
     static int count = 0;
 
@@ -37,7 +54,46 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
         textArea = new JTextArea();
         // Add a document listener to the text area
         textArea.getDocument().addDocumentListener(this);
+        // Initialize old document
+        oldDocument = textArea.getText();
+        // Current caret position
+        currentCaretPosition = textArea.getCaretPosition();
+        // Initialize to 0 upon starting the text editor
+        lastCaretPosition = 0;
 
+        undoStack = new Stack<>();
+
+        ActionListener undoPush = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // If we have added and undo will remove a chunk
+                if(textArea.getText().length() >= oldDocument.length()) {
+                    Chunk undoCandidate = new Chunk(textArea.getText().substring(lastCaretPosition, currentCaretPosition), lastCaretPosition);
+                    if(undoStack.isEmpty() && !undoCandidate.getTextChunk().equals("")) {
+                        undoStack.push(undoCandidate);
+                        System.out.println("Current chunk is:    " + undoStack.peek().getTextChunk());
+                    } else {
+                        if (!undoStack.peek().chunkEquals(undoCandidate) && !undoCandidate.getTextChunk().equals("")) {
+                            undoStack.push(undoCandidate);
+                            System.out.println("Current chunk is:    " + undoStack.peek().getTextChunk());
+                        } else {
+                            System.out.println("Not pushing dupe chunk");
+                        }
+                    }
+                    lastCaretPosition = currentCaretPosition;
+                    oldDocument = textArea.getText();
+                }
+
+                // testing output
+                if(!undoStack.isEmpty()) {
+                    System.out.println("Last chunk is:    " + undoStack.peek().getTextChunk());
+                }
+            }
+        };
+
+        // Create the timer
+        timer = new Timer(5000, undoPush); // null is placeholder for create chunk function
+        timer.start();
         // Placeholder UI
         try {
             // Set metal look and feel
@@ -75,7 +131,7 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
         menuOne.add(menuItem3);
         menuOne.add(menuItem9);
 
-        // Create secondary menu for the drop down
+        // Create secondary menu for the dropdown
         JMenu menuTwo = new JMenu("Edit");
 
         // Create menu items
@@ -220,6 +276,7 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
     }
 
     public void insertUpdate(DocumentEvent e) {
+        currentCaretPosition++;
         count++;
         System.out.println(count+": Insert update - "+textArea.getText());
     }
