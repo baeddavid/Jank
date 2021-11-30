@@ -3,6 +3,9 @@ package org.TextAreaMethods;
 import javax.swing.*;
 
 import org.Jank;
+import org.TextAreaClasses.Chunk;
+
+import java.util.Stack;
 
 public class TextAreaMethods {
 
@@ -20,5 +23,15 @@ public class TextAreaMethods {
     public static void cut(JTextArea textArea) {
         Jank.clipboard = textArea.getSelectedText();
         textArea.replaceSelection("");
+    }
+
+    // Undo method
+    public static void undo() {
+
+    }
+
+    // Removing a chunk from a document
+    public static void removeChunk(JTextArea textArea, Chunk undo) {
+        textArea.replaceRange("", undo.getStartingIdx(), undo.getStartingIdx() + undo.getTextChunk().length());
     }
 }
