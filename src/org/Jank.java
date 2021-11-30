@@ -36,8 +36,10 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
     // Clipboard - where we store cut/copied text
     public static String clipboard;
 
-    // Stack containing chunks
+    // Stack containing chunks for undo
     public static Stack<Chunk> undoStack;
+    // Stack containing chunks for redo
+    public static Stack<Chunk> redoStack;
 
     // Timer to keep track of last key event
     public Timer timer;
@@ -66,27 +68,28 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
         ActionListener undoPush = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // If we have added and undo will remove a chunk
-                if(textArea.getText().length() >= oldDocument.length()) {
+                // The current document is longer than the previous document so undo here will remove from the document
+                if(textArea.getText().length() > oldDocument.length()) {
                     Chunk undoCandidate = new Chunk(textArea.getText().substring(lastCaretPosition, currentCaretPosition), lastCaretPosition);
                     if(undoStack.isEmpty() && !undoCandidate.getTextChunk().equals("")) {
                         undoStack.push(undoCandidate);
-                        System.out.println("Current chunk is:    " + undoStack.peek().getTextChunk());
+                        lastCaretPosition = undoCandidate.getTextChunk().length();
+                        System.out.println("Current chunk is:    " + undoStack.peek().getTextChunk() + " Starting at index: " + undoStack.peek().getStartingIdx());
                     } else {
                         if (!undoStack.peek().chunkEquals(undoCandidate) && !undoCandidate.getTextChunk().equals("")) {
                             undoStack.push(undoCandidate);
-                            System.out.println("Current chunk is:    " + undoStack.peek().getTextChunk());
+                            lastCaretPosition = undoCandidate.getTextChunk().length();
+                            System.out.println("Current chunk is:    " + undoStack.peek().getTextChunk() + " Starting at index: " + undoStack.peek().getStartingIdx());
                         } else {
                             System.out.println("Not pushing dupe chunk");
                         }
                     }
-                    lastCaretPosition = currentCaretPosition;
                     oldDocument = textArea.getText();
                 }
 
                 // testing output
                 if(!undoStack.isEmpty()) {
-                    System.out.println("Last chunk is:    " + undoStack.peek().getTextChunk());
+                    System.out.println("Last chunk is:    " + undoStack.peek().getTextChunk() + " Starting at index: " + undoStack.peek().getStartingIdx());
                 }
             }
         };
@@ -277,16 +280,11 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
 
     public void insertUpdate(DocumentEvent e) {
         currentCaretPosition++;
-        count++;
-        System.out.println(count+": Insert update - "+textArea.getText());
     }
     public void removeUpdate(DocumentEvent e) {
-        count++;
-        System.out.println(count+": Remove update - "+textArea.getText());
+        currentCaretPosition--;
     }
     public void changedUpdate(DocumentEvent e) {
-        count++;
-        System.out.println(count+": Change update - "+textArea.getText());
     }
 
     public static void main(String[] args) {
