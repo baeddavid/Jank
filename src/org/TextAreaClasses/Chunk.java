@@ -9,6 +9,10 @@ public class Chunk {
         this.startingIdx = startingIdx;
     }
 
+    public boolean chunkEquals(Chunk pattern) {
+        return getTextChunk().equals(pattern.getTextChunk());
+    }
+
     public Integer getStartingIdx() {
         return startingIdx;
     }
