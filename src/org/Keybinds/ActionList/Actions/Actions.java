@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.TextAreaClasses.UndoData;
 import org.TextAreaMethods.TextAreaMethods;
 import org.Jank;
 
@@ -58,7 +59,7 @@ public class Actions {
         Action undo = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Undo");
+                TextAreaMethods.removeChunk(Jank.textArea, Jank.timeLine.undoState());
             }
         };
         return undo;
@@ -81,6 +82,7 @@ public class Actions {
         keyActionPairList.add(new KeyActionPair("copyAction", copyAction()));
         keyActionPairList.add(new KeyActionPair("pasteAction", pasteAction()));
         keyActionPairList.add(new KeyActionPair("cutAction", cutAction()));
+        keyActionPairList.add(new KeyActionPair("undoAction", undo()));
         return keyActionPairList;
     }
 }
