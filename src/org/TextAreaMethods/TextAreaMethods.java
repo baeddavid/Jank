@@ -3,9 +3,7 @@ package org.TextAreaMethods;
 import javax.swing.*;
 
 import org.Jank;
-import org.TextAreaClasses.Chunk;
-
-import java.util.Stack;
+import org.TextAreaClasses.UndoData;
 
 public class TextAreaMethods {
 
@@ -31,7 +29,8 @@ public class TextAreaMethods {
     }
 
     // Removing a chunk from a document
-    public static void removeChunk(JTextArea textArea, Chunk undo) {
-        textArea.replaceRange("", undo.getStartingIdx(), undo.getStartingIdx() + undo.getTextChunk().length());
+    public static void removeChunk(JTextArea textArea, UndoData undoData) {
+        System.out.println(undoData.getUndoText());
+        textArea.replaceRange(undoData.getUndoText() , 0, textArea.getText().length());
     }
 }
