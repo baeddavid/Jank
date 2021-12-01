@@ -2,21 +2,27 @@ package org.TextAreaClasses;
 
 import org.Jank;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Iterator;
+import java.util.ListIterator;
 
 public class TimeLine {
-    private List<UndoData> timeLine;
+    private LinkedList<UndoData> timeLine;
     private int currentState;
 
     public TimeLine() {
-        timeLine = new ArrayList<>();
+        timeLine = new LinkedList<>();
         currentState = -1;
+    }
+
+    public void initialize() {
+        currentState++;
+        timeLine.add(new UndoData(""));
     }
 
     public void addState(UndoData insertState) {
         currentState++;
-        timeLine.add(insertState);
+        timeLine.add(currentState, insertState);
     }
 
     public UndoData currentState() {
@@ -51,5 +57,16 @@ public class TimeLine {
 
     public int getCurrentState() {
         return currentState;
+    }
+
+    public boolean contains(String pattern) {
+        ListIterator <UndoData> iterator = timeLine.listIterator();
+        while(iterator.hasNext()) {
+            UndoData undo = iterator.next();
+            if(undo.getUndoText().equals(pattern)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
