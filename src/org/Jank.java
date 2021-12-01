@@ -1,14 +1,13 @@
 package org;
 
-import org.TextAreaClasses.Chunk;
+import org.TextAreaClasses.TimeLine;
+import org.TextAreaClasses.UndoData;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.OceanTheme;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -28,7 +27,7 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
     static JFrame frame;
 
     // Old document for comparison
-    public String oldDocument;
+    public static String oldDocument;
     // Current caret position (1 indexed)
     public int currentCaretPosition;
     // Last caret position
@@ -36,15 +35,11 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
     // Clipboard - where we store cut/copied text
     public static String clipboard;
 
-    // Stack containing chunks for undo
-    public static Stack<Chunk> undoStack;
-    // Stack containing chunks for redo
-    public static Stack<Chunk> redoStack;
+    //Timeline
+    public static TimeLine timeLine;
 
     // Timer to keep track of last key event
     public Timer timer;
-
-    static int count = 0;
 
     // Constructor
     public Jank() {
@@ -63,36 +58,20 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
         // Initialize to 0 upon starting the text editor
         lastCaretPosition = 0;
 
-        undoStack = new Stack<>();
+        timeLine = new TimeLine();
+        timeLine.initialize();
 
         ActionListener undoPush = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // The current document is longer than the previous document so undo here will remove from the document
-                if(textArea.getText().length() > oldDocument.length()) {
-                    Chunk undoCandidate = new Chunk(textArea.getText().substring(lastCaretPosition, currentCaretPosition), lastCaretPosition);
-                    if(undoStack.isEmpty() && !undoCandidate.getTextChunk().equals("")) {
-                        undoStack.push(undoCandidate);
-                        lastCaretPosition = undoCandidate.getTextChunk().length();
-                        System.out.println("Current chunk is:    " + undoStack.peek().getTextChunk() + " Starting at index: " + undoStack.peek().getStartingIdx());
-                    } else {
-                        if (!undoStack.peek().chunkEquals(undoCandidate) && !undoCandidate.getTextChunk().equals("")) {
-                            undoStack.push(undoCandidate);
-                            lastCaretPosition = undoCandidate.getTextChunk().length();
-                            System.out.println("Current chunk is:    " + undoStack.peek().getTextChunk() + " Starting at index: " + undoStack.peek().getStartingIdx());
-                        } else {
-                            System.out.println("Not pushing dupe chunk");
-                        }
-                    }
-                    oldDocument = textArea.getText();
-                }
-
-                // testing output
-                if(!undoStack.isEmpty()) {
-                    System.out.println("Last chunk is:    " + undoStack.peek().getTextChunk() + " Starting at index: " + undoStack.peek().getStartingIdx());
+                String document = textArea.getText();
+                if ((timeLine.isEmpty() && !document.equals("")) ||
+                        (!timeLine.contains(document) && !document.equals(""))) {
+                    timeLine.addState(new UndoData(document));
+                    System.out.println("Document: " + document + "\nSize: " + timeLine.size());
                 }
             }
-        };
+        } ;
 
         // Create the timer
         timer = new Timer(5000, undoPush); // null is placeholder for create chunk function
