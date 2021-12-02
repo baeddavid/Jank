@@ -61,7 +61,7 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
         timeLine = new TimeLine();
         timeLine.initialize();
 
-        ActionListener undoPush = new ActionListener() {
+        ActionListener timeLineListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String document = textArea.getText();
@@ -74,7 +74,7 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
         } ;
 
         // Create the timer
-        timer = new Timer(5000, undoPush); // null is placeholder for create chunk function
+        timer = new Timer(5000, timeLineListener); // null is placeholder for create chunk function
         timer.start();
         // Placeholder UI
         try {
@@ -145,6 +145,7 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
         generateKeybind(textArea, KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK, "copyAction"); // Copy Action (^C)
         generateKeybind(textArea, KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK, "pasteAction"); // Paste Action
         generateKeybind(textArea, KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK, "undoAction"); // Not yet implemented
+        generateKeybind(textArea, KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, "redoAction");
 
         // Set the menu bars
         frame.setJMenuBar(menuBar);
