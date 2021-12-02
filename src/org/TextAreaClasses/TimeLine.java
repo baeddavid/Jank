@@ -38,8 +38,9 @@ public class TimeLine {
         return timeLine.get(i);
     }
 
-    public UndoData redo() {
-        return timeLine.get(++currentState);
+    public UndoData redoState() {
+        currentState++;
+        return timeLine.get(currentState);
     }
 
     public UndoData getLast() {
