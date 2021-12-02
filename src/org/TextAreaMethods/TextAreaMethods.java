@@ -24,8 +24,8 @@ public class TextAreaMethods {
     }
 
     // Undo method
-    public static void undo() {
-
+    public static void redo(JTextArea textArea, UndoData undoData) {
+        textArea.replaceRange(undoData.getUndoText(), 0, textArea.getText().length());
     }
 
     // Removing a chunk from a document
