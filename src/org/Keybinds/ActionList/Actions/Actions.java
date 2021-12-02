@@ -70,7 +70,7 @@ public class Actions {
         Action redo = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Redo");
+                TextAreaMethods.redo(Jank.textArea, Jank.timeLine.redoState());
             }
         };
         return redo;
@@ -83,6 +83,7 @@ public class Actions {
         keyActionPairList.add(new KeyActionPair("pasteAction", pasteAction()));
         keyActionPairList.add(new KeyActionPair("cutAction", cutAction()));
         keyActionPairList.add(new KeyActionPair("undoAction", undo()));
+        keyActionPairList.add(new KeyActionPair("redoAction", redo()));
         return keyActionPairList;
     }
 }
