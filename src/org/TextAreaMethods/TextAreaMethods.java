@@ -33,4 +33,9 @@ public class TextAreaMethods {
         System.out.println(undoData.getUndoText());
         textArea.replaceRange(undoData.getUndoText() , 0, textArea.getText().length());
     }
+
+    // New Window
+    public static void newWindow() {
+        Jank jank = new Jank();
+    }
 }
