@@ -153,6 +153,7 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
         frame.setJMenuBar(menuBar);
         frame.add(textArea);
         frame.setSize(750,750);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
