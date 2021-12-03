@@ -76,6 +76,17 @@ public class Actions {
         return redo;
     }
 
+    // New window action
+    public static Action newWindow() {
+        Action newWindow = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TextAreaMethods.newWindow();
+            }
+        };
+        return newWindow;
+    }
+
     public static List<KeyActionPair> generateActionList() {
         List<KeyActionPair> keyActionPairList = new ArrayList<>();
         keyActionPairList.add(new KeyActionPair("sayHi", sayHi()));
@@ -84,6 +95,7 @@ public class Actions {
         keyActionPairList.add(new KeyActionPair("cutAction", cutAction()));
         keyActionPairList.add(new KeyActionPair("undoAction", undo()));
         keyActionPairList.add(new KeyActionPair("redoAction", redo()));
+        keyActionPairList.add(new KeyActionPair("newWindowAction", newWindow()));
         return keyActionPairList;
     }
 }
