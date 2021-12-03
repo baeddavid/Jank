@@ -144,10 +144,10 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
         generateKeybind(textArea, KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK, "cutAction"); // Cut Action
         generateKeybind(textArea, KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK, "copyAction"); // Copy Action (^C)
         generateKeybind(textArea, KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK, "pasteAction"); // Paste Action
-        generateKeybind(textArea, KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK, "undoAction"); // Not yet implemented
-        generateKeybind(textArea, KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, "redoAction");
+        generateKeybind(textArea, KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK, "undoAction"); // Undo
+        generateKeybind(textArea, KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, "redoAction"); // Redo
 
-        generateKeybind(textArea, KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK, "newWindowAction");
+        generateKeybind(textArea, KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK, "newWindowAction"); // Open new window
 
         // Set the menu bars
         frame.setJMenuBar(menuBar);
