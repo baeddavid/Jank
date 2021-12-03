@@ -21,22 +21,19 @@ import static org.Keybinds.RemoveKeybind.removeKeybind;
 
 public class Jank extends JFrame implements ActionListener, DocumentListener {
     // Text component
-    public static JTextArea textArea;
+    public static JTextArea textArea; // TODO make this non-static
 
     // Frame for the editor
-    static JFrame frame;
-
-    // Old document for comparison
-    public static String oldDocument;
+    public static JFrame frame; // TODO make this non-static
     // Current caret position (1 indexed)
     public int currentCaretPosition;
     // Last caret position
     public int lastCaretPosition;
     // Clipboard - where we store cut/copied text
-    public static String clipboard;
+    public static String clipboard; // TODO make this non-static
 
     //Timeline
-    public static TimeLine timeLine;
+    public static TimeLine timeLine; // TODO make this non-static
 
     // Timer to keep track of last key event
     public Timer timer;
@@ -51,8 +48,6 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
         textArea = new JTextArea();
         // Add a document listener to the text area
         textArea.getDocument().addDocumentListener(this);
-        // Initialize old document
-        oldDocument = textArea.getText();
         // Current caret position
         currentCaretPosition = textArea.getCaretPosition();
         // Initialize to 0 upon starting the text editor
