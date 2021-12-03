@@ -59,7 +59,7 @@ public class Actions {
         Action undo = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TextAreaMethods.removeChunk(Jank.textArea, Jank.timeLine.undoState());
+                TextAreaMethods.undo(Jank.textArea, Jank.timeLine.undoState());
             }
         };
         return undo;
