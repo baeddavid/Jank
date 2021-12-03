@@ -25,12 +25,13 @@ public class TextAreaMethods {
 
     // Undo method
     public static void redo(JTextArea textArea, UndoData undoData) {
+        if(undoData == null) { return; }
         textArea.replaceRange(undoData.getUndoText(), 0, textArea.getText().length());
     }
 
     // Removing a chunk from a document
-    public static void removeChunk(JTextArea textArea, UndoData undoData) {
-        System.out.println(undoData.getUndoText());
+    public static void undo(JTextArea textArea, UndoData undoData) {
+        if(undoData == null) { return; }
         textArea.replaceRange(undoData.getUndoText() , 0, textArea.getText().length());
     }
 
