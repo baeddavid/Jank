@@ -1,8 +1,8 @@
-#Jank
+# Jank
 
 [![Jank.png](https://i.postimg.cc/tTdKhgk5/Jank.png)](https://postimg.cc/0MQXvPLM)
 
-##About
+## About
 Jank is a little basic and potentially poorly optimized text editor. I started writing Jank because I wanted to get my hands dirty
 with writing a text editor, hence the name Jank. It is crude and somewhat messy, but I plan on optimizing and fixing bugs in the future at a slow and 
 steady rate. Something to kinda nibble on to pass time. 
