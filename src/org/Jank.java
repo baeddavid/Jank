@@ -147,6 +147,8 @@ public class Jank extends JFrame implements ActionListener, DocumentListener {
         generateKeybind(textArea, KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK, "undoAction"); // Not yet implemented
         generateKeybind(textArea, KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, "redoAction");
 
+        generateKeybind(textArea, KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK, "newWindowAction");
+
         // Set the menu bars
         frame.setJMenuBar(menuBar);
         frame.add(textArea);
