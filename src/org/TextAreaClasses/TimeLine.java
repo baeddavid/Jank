@@ -30,6 +30,9 @@ public class TimeLine {
     }
 
     public UndoData undoState() {
+        if(currentState == 0) {
+            return null;
+        }
         currentState--;
         return timeLine.get(currentState);
     }
@@ -39,6 +42,9 @@ public class TimeLine {
     }
 
     public UndoData redoState() {
+        if(currentState == timeLine.size()) {
+            return null;
+        }
         currentState++;
         return timeLine.get(currentState);
     }
